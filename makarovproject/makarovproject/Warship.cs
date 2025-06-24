@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.Cryptography.X509Certificates;
 
 namespace makarovproject
 {
@@ -10,6 +11,8 @@ namespace makarovproject
         static int playerX = 2;
         static int playerY = 1;
         static bool jogando = true;
+        static ConsoleColor corEscolhida = ConsoleColor.White;
+
 
         public static void Main()
         {
@@ -22,9 +25,12 @@ namespace makarovproject
             string tecla;
             do
             {
-                Console.Clear();
+                corConfirmada();
+               
                 Console.WriteLine("USE A TELA CHEIA PARA UMA MELHOR EXPERIÊNCIA!");
+                //Menu Principal
                 Console.WriteLine("\r\nTECLAS:\r\nUse a tecla 1 para jogar \r\nTecla 2 para abrir as configurações\r\nTecla 3 Para abrir os créditos\r\nTecla 4 para fechar o jogo \r\nTecla X para sair dos menus!");
+                
                 //Jogar
                 Console.WriteLine("                      _  ___   ____    _    ____\r\n                     | |/ _ \\ / ___|  / \\  |  _ \\\r\n                  _  | | | | | |  _  / _ \\ | |_)\r\n                 | |_| | |_| | |_| |/ ___ \\|  _ <\r\n                  \\___/ \\___/ \\____/_/   \\_\\_| \\_\\");
                
@@ -77,17 +83,41 @@ namespace makarovproject
             } while (tecla != "4");
             // Console.WriteLine("............................................................................  \r\n.............................................................. |//>..........\r\n.............|//>...........................................................\r\n............................................................................\r\n.................................................+=>........................\r\n...........................|>......................................[ ]>.....\r\n............................................................................\r\n.......|>...................................................................\r\n............................................................................\r\n.................................................|>.........................\r\n..................................<\\\\|......................................\r\n......|/>...................................................................\r\n............................................................................\r\n.......................|>......................................<=+..........\r\n.........|//>...............................................................\r\n...........................................<|...............................\r\n.............................................................=>.............\r\n....................+ |> + .................................................");
         }
-        
+        public static void ManterCor(string mensagem , ConsoleColor cor)
+        {
+
+            Console.ForegroundColor = cor;
+            Console.WriteLine(mensagem);
+            Console.ResetColor();
+            
+        }
+        public static void corConfirmada()
+        {
+            Console.Clear();
+            Console.ForegroundColor = corEscolhida;
+            
+        }
         public static void EscolherCor()
         {
             string tecla;
             do
             {
-                Console.Clear();                                                                                                                                                             //Número 1                                                      //Número 2                                       //Número 3
-                Console.WriteLine("Aqui você tem a informação de teclas que mudam a cor e dá a possibilidade de escolher o que você vai querer no terminal.\r\nAs teclas para as cores são: \r\n  _ \r\n / |\r\n | |\r\n | |\r\n |_|     \r\n ____\r\n|___ \\\r\n  __) |\r\n / __/\r\n|_____|       \r\n _____\r\n|___ /\r\n  |_ \\\r\n ___) |\r\n|____/");
-                Console.WriteLine("1 - Vermelho");
-                Console.WriteLine("2 - Amarelo");
-                Console.WriteLine("3 - Verde");
+
+                corConfirmada();
+                Console.WriteLine("Aqui você tem a informação de teclas que mudam a cor e dá a possibilidade de escolher o que você vai querer no terminal.\r\nAs teclas para as cores são: ");
+                
+                //Número 1
+                ManterCor("  _          __     _______ ____  __  __ _____ _     _   _  ___  \r\n / |         \\ \\   / / ____|  _ \\|  \\/  | ____| |   | | | |/ _ \\ \r\n | |  _____   \\ \\ / /|  _| | |_) | |\\/| |  _| | |   | |_| | | | |\r\n | | |_____|   \\ V / | |___|  _ <| |  | | |___| |___|  _  | |_| |\r\n |_|            \\_/  |_____|_| \\_\\_|  |_|_____|_____|_| |_|\\___/ \r\n                                                                 ", ConsoleColor.Red);
+
+
+                //Número 2
+                ManterCor("  ____               _    __  __    _    ____  _____ _     ___  \r\n |___ \\             / \\  |  \\/  |  / \\  |  _ \\| ____| |   / _ \\ \r\n   __) |  _____    / _ \\ | |\\/| | / _ \\ | |_) |  _| | |  | | | |\r\n  / __/  |_____|  / ___ \\| |  | |/ ___ \\|  _ <| |___| |__| |_| |\r\n |_____|         /_/   \\_\\_|  |_/_/   \\_\\_| \\_\\_____|_____\\___/ \r\n                                                                ", ConsoleColor.Yellow);
+
+
+                //Número 3
+
+                ManterCor("  _____          __     _______ ____  ____  _____ \r\n |___ /          \\ \\   / / ____|  _ \\|  _ \\| ____|\r\n   |_ \\   _____   \\ \\ / /|  _| | |_) | | | |  _|  \r\n  ___) | |_____|   \\ V / | |___|  _ <| |_| | |___ \r\n |____/             \\_/  |_____|_| \\_\\____/|_____|\r\n                                                  ",ConsoleColor.Green);
+
                 tecla = Console.ReadLine();
                 switch (tecla)
                 {
@@ -96,7 +126,10 @@ namespace makarovproject
                         string confi = Console.ReadLine();
                         if (confi == "y")
                         {
-                            Console.ForegroundColor = ConsoleColor.Red;
+                            
+                            corEscolhida = ConsoleColor.Red;
+                            
+
                         }
                         break;
 
@@ -105,7 +138,8 @@ namespace makarovproject
                         string Conf = Console.ReadLine();
                         if (Conf == "y")
                         {
-                            Console.ForegroundColor = ConsoleColor.Yellow;
+                            //Console.WriteLine("Perfeito! A cor Amarela foi selecionada com sucesso. Volte para o menu e a cor será definitivamente aplicada!");
+                            corEscolhida = ConsoleColor.Yellow;
                         }
                         break;
 
@@ -114,7 +148,7 @@ namespace makarovproject
                         string Confirm = Console.ReadLine();
                         if (Confirm == "y")
                         {
-                            Console.ForegroundColor = ConsoleColor.Green;
+                            corEscolhida = ConsoleColor.Green;
                         }
                         break;
                 }
