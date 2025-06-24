@@ -11,7 +11,7 @@ namespace makarovproject
         static int playerY = 1;
         static bool jogando = true;
 
-        static void Main()
+        static void temp()
         {
             Console.Clear();
             //colocar menu 

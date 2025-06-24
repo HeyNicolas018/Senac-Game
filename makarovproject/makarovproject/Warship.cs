@@ -2,9 +2,9 @@
 
 namespace makarovproject
 {
-    class WarshipCoding
+    class Warship
     {
-        public static void jogo()
+        public static void Main()
         {
             /*
             if () { }
@@ -16,17 +16,25 @@ namespace makarovproject
             do
             {
                 Console.Clear();
-                Console.WriteLine("Jogar");
-                Console.WriteLine("Configuração");
-                Console.WriteLine("Creditos");
-                Console.WriteLine("Sair");
+                Console.WriteLine("USE A TELA CHEIA PARA UMA MELHOR EXPERIÊNCIA!");
                 Console.WriteLine("\r\nTECLAS:\r\nUse a tecla 1 para jogar \r\nTecla 2 para abrir as configurações\r\nTecla 3 Para abrir os créditos\r\nTecla 4 para fechar o jogo \r\nTecla X para sair dos menus!");
+                //Jogar
+                Console.WriteLine("                      _  ___   ____    _    ____\r\n                     | |/ _ \\ / ___|  / \\  |  _ \\\r\n                  _  | | | | | |  _  / _ \\ | |_)\r\n                 | |_| | |_| | |_| |/ ___ \\|  _ <\r\n                  \\___/ \\___/ \\____/_/   \\_\\_| \\_\\");
+               
+                //Configuracao
+                Console.WriteLine("  ____ ___  _   _ _____ ___ ____ _   _ ____      _    ____ ___  _____ ____\r\n / ___/ _ \\| \\ | |  ___|_ _/ ___| | | |  _ \\    / \\  / ___/ _ \\| ____/ ___|\r\n| |  | | | |  \\| | |_   | | |  _| | | | |_) |  / _ \\| |  | | | |  _| \\___ \\\r\n| |__| |_| | |\\  |  _|  | | |_| | |_| |  _ <  / ___ \\ |__| |_| | |___ ___) |\r\n \\____\\___/|_| \\_|_|   |___\\____|\\___/|_| \\_\\/_/   \\_\\____\\___/|_____|____/");
+               
+                //Creditos
+                Console.WriteLine("              ____ ____  _____ ____ ___ _____ ___  ____\r\n             / ___|  _ \\| ____|  _ \\_ _|_   _/ _ \\/ ___|\r\n            | |   | |_) |  _| | | | | |  | || | | \\___ \\\r\n            | |___|  _ <| |___| |_| | |  | || |_| |___) |\r\n             \\____|_| \\_\\_____|____/___| |_| \\___/|____/");
+               
+                //Sair
+                Console.WriteLine("                        ____    _    ___ ____\r\n                       / ___|  / \\  |_ _|  _ \\\r\n                       \\___ \\ / _ \\  | || |_)\r\n                        ___) / ___ \\ | ||  _ <\r\n                       |____/_/   \\_\\___|_| \\_\\");
                 tecla = Console.ReadLine();
                 switch (tecla)
                 {
                     case "1":
                         Console.WriteLine("Opção jogar escolhida");
-                        //jogando();
+                        jogando();
                         break;
 
                     case "2":
@@ -62,18 +70,21 @@ namespace makarovproject
             } while (tecla != "4");
             // Console.WriteLine("............................................................................  \r\n.............................................................. |//>..........\r\n.............|//>...........................................................\r\n............................................................................\r\n.................................................+=>........................\r\n...........................|>......................................[ ]>.....\r\n............................................................................\r\n.......|>...................................................................\r\n............................................................................\r\n.................................................|>.........................\r\n..................................<\\\\|......................................\r\n......|/>...................................................................\r\n............................................................................\r\n.......................|>......................................<=+..........\r\n.........|//>...............................................................\r\n...........................................<|...............................\r\n.............................................................=>.............\r\n....................+ |> + .................................................");
         }
-        int time = 1000;
+        
         public static void EscolherCor()
         {
             string tecla;
             do
             {
-                Console.Clear();
-                Console.WriteLine("Aqui você tem a informação de teclas que mudam a cor e dá a possibilidade de escolher o que você vai querer no terminal.\r\nAs teclas para as cores são: \r\n5\r\n6\r\n7\r\n");
+                Console.Clear();                                                                                                                                                             //Número 1                                                      //Número 2                                       //Número 3
+                Console.WriteLine("Aqui você tem a informação de teclas que mudam a cor e dá a possibilidade de escolher o que você vai querer no terminal.\r\nAs teclas para as cores são: \r\n  _ \r\n / |\r\n | |\r\n | |\r\n |_|     \r\n ____\r\n|___ \\\r\n  __) |\r\n / __/\r\n|_____|       \r\n _____\r\n|___ /\r\n  |_ \\\r\n ___) |\r\n|____/");
+                Console.WriteLine("1 - Vermelho");
+                Console.WriteLine("2 - Amarelo");
+                Console.WriteLine("3 - Verde");
                 tecla = Console.ReadLine();
                 switch (tecla)
                 {
-                    case "5":
+                    case "1":
                         Console.WriteLine("Deseja Aplicar a cor Vermelha no terminal?\r\nY para confirmar\r\nN para Cancelar ");
                         string confi = Console.ReadLine();
                         if (confi == "y")
@@ -82,7 +93,7 @@ namespace makarovproject
                         }
                         break;
 
-                    case "6":
+                    case "2":
                         Console.WriteLine("Deseja Aplicar a cor Amarela no terminal?\r\nY para confirmar\r\nN para Cancelar ");
                         string Conf = Console.ReadLine();
                         if (Conf == "y")
@@ -91,7 +102,7 @@ namespace makarovproject
                         }
                         break;
 
-                    case "7":
+                    case "3":
                         Console.WriteLine("Deseja Aplicar a cor Verde no terminal?\r\nY para confirmar\r\nN para Cancelar ");
                         string Confirm = Console.ReadLine();
                         if (Confirm == "y")
@@ -116,7 +127,7 @@ namespace makarovproject
         }
 
     }
-} 
+}
 
 
 /*
@@ -184,4 +195,23 @@ OS  " . " REPRESENTAM O MAR DO JOGO.
          --> "aqui está o jogador e ele começa com um Destroyer
                           tendo a possibilidade de upar seu navio ao decorrer
                           do jogo" 
+*/
+
+
+/*
+                                                                               
+                                                                            
+                                                                               
+                                          _____   ___      ______       _      _______     
+                                       |_   _|.'   `.  .' ___  |     / \    |_   __ \    
+                                         | | /  .-.  \/ .'   \_|    / _ \     | |__) |   
+                                     _   | | | |   | || |   ____   / ___ \    |  __ /    
+                                    | |__' | \  `-'  /\ `.___]  |_/ /   \ \_ _| |  \ \_  
+                                    `.____.'  `.___.'  `._____.'|____| |____|____| |___| 
+                                                                                                                             
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
 */
