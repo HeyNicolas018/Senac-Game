@@ -25,9 +25,9 @@ namespace makarovproject
             string tecla;
             do
             {
-                corConfirmada();
                
-                Console.WriteLine("USE A TELA CHEIA PARA UMA MELHOR EXPERIÊNCIA!");
+                corConfirmada();
+                
                 //Menu Principal
                 Console.WriteLine("\r\nTECLAS:\r\nUse a tecla 1 para jogar \r\nTecla 2 para abrir as configurações\r\nTecla 3 Para abrir os créditos\r\nTecla 4 para fechar o jogo \r\nTecla X para sair dos menus!");
                 
@@ -42,6 +42,7 @@ namespace makarovproject
                
                 //Sair
                 Console.WriteLine("                        ____    _    ___ ____\r\n                       / ___|  / \\  |_ _|  _ \\\r\n                       \\___ \\ / _ \\  | || |_)\r\n                        ___) / ___ \\ | ||  _ <\r\n                       |____/_/   \\_\\___|_| \\_\\");
+               
                 tecla = Console.ReadLine();
                 switch (tecla)
                 {
