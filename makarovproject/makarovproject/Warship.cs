@@ -4,6 +4,13 @@ namespace makarovproject
 {
     class Warship
     {
+        static char[,] mapa;
+        static int largura = 20;
+        static int altura = 10;
+        static int playerX = 2;
+        static int playerY = 1;
+        static bool jogando = true;
+
         public static void Main()
         {
             /*
@@ -34,7 +41,7 @@ namespace makarovproject
                 {
                     case "1":
                         Console.WriteLine("Opção jogar escolhida");
-                        jogando();
+                        jogar();
                         break;
 
                     case "2":
@@ -124,6 +131,88 @@ namespace makarovproject
                 Console.WriteLine("O jogo foi inspirado em navios e ações marítimas. Os navios foram expirados em símbolos que mostram o que cada é.\r\nBoa sorte se jogar novamente e busque o máximo de pontuação que conseguir!\r\nObrigado por jogar e até a próxima!");
                 tecla = Console.ReadLine();
             } while (tecla != "x");
+        }
+
+        static void jogar()
+        {
+            iniciarMapa();
+            while (jogando)
+            {
+
+                Console.Clear();
+                desenhaMapa();
+
+                var tecla = Console.ReadKey(true).Key;
+                AtualizarPosicao(tecla);
+            }
+        }
+        static void iniciarMapa()
+        {
+            mapa = new char[largura, altura];
+
+            for (int x = 0; x < largura; x++)
+            {
+                for (int y = 0; y < altura; y++)
+                {
+                    //Ultima posiçao do vetor é tamanho - 1
+                    if (x == 0 || y == 0 || x == largura - 1 || y == altura - 1)
+                    {
+                        mapa[x, y] = '#';
+                    }
+                    else
+                    {
+                        mapa[x, y] = '.';
+
+                    }
+                }
+            }
+            mapa[playerX, playerY] = '>';
+            mapa[playerX - 1, playerY] = '-';
+        }
+        static void desenhaMapa()
+        {
+            for (int y = 0; y < altura; y++)
+            {
+                for (int x = 0; x < largura; x++)
+                {
+
+                    Console.Write(mapa[x, y]);
+                }
+                Console.WriteLine();
+            }
+        }
+
+
+        static void AtualizarPosicao(ConsoleKey tecla)
+        {
+            int tempX = playerX;
+            int tempY = playerY;
+            //oi
+            switch (tecla)
+            {
+                case ConsoleKey.A:
+                    tempX--;
+                    break;
+                case ConsoleKey.S:
+                    tempY++;
+                    break;
+                case ConsoleKey.D:
+                    tempX++;
+                    break;
+                case ConsoleKey.W:
+                    tempY--;
+                    break;
+            }
+
+            if (mapa[tempX, tempY] != '#' && mapa[tempX - 1, tempY] != '#')
+            {
+                mapa[playerX, playerY] = '.';
+                mapa[playerX - 1, playerY] = '.';
+                mapa[tempX, tempY] = '>';
+                mapa[tempX - 1, tempY] = '-';
+                playerX = tempX;
+                playerY = tempY;
+            }
         }
 
     }
