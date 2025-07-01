@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.Design;
 using System.Security.Cryptography.X509Certificates;
 
 namespace makarovproject
@@ -8,13 +9,15 @@ namespace makarovproject
         static char[,] mapa;
         static int largura = 50;
         static int altura = 20;
-        static int playerX = 24;
-        static int playerY = 10;
+        static Navio player;
         static bool jogando = true;
         static ConsoleColor corEscolhida = ConsoleColor.White;
-        static int[][] inimigos = new int[5][]; 
+        static int[][] inimigos;
 
 
+
+
+        
         public static void Main()
         {
             /*
@@ -85,6 +88,8 @@ namespace makarovproject
             } while (tecla != "4");
             // Console.WriteLine("............................................................................  \r\n.............................................................. |//>..........\r\n.............|//>...........................................................\r\n............................................................................\r\n.................................................+=>........................\r\n...........................|>......................................[ ]>.....\r\n............................................................................\r\n.......|>...................................................................\r\n............................................................................\r\n.................................................|>.........................\r\n..................................<\\\\|......................................\r\n......|/>...................................................................\r\n............................................................................\r\n.......................|>......................................<=+..........\r\n.........|//>...............................................................\r\n...........................................<|...............................\r\n.............................................................=>.............\r\n....................+ |> + .................................................");
         }
+
+
         public static void ManterCor(string mensagem, ConsoleColor cor)
         {
 
@@ -189,24 +194,44 @@ namespace makarovproject
         {
             mapa = new char[largura, altura];
 
-            for (int x = 0; x < largura; x++)
-            {
-                for (int y = 0; y < altura; y++)
-                {
-                    //Ultima posiçao do vetor é tamanho - 1
-                    if (x == 0 || y == 0 || x == largura - 1 || y == altura - 1)
-                    {
-                        mapa[x, y] = '#';
-                    }
-                    else
-                    {
-                        mapa[x, y] = '.';
+            //cria inimigos
+            inimigos = new int[5][];
 
+            Random random = new Random();
+            for (int i = 0; i < 5; i++)
+            {
+                inimigos[i] = new int [5];
+                inimigos[i][0] = random.Next(1, 20);
+                inimigos[i][1] = random.Next(1, 50);
+            }
+            //finaliza
+
+            player = new Navio(24 , 10, inimigos, mapa); 
+
+                for (int x = 0; x < largura; x++)
+                {
+                    for (int y = 0; y < altura; y++)
+                    {
+                        //Ultima posiçao do vetor é tamanho - 1
+                        if (x == 0 || y == 0 || x == largura - 1 || y == altura - 1)
+                        {
+                            mapa[x, y] = '#';
+                        }
+                        else
+                        {
+                            mapa[x, y] = '.';
+                        }                       
+                        for (int i = 0; i < 1; i++)
+                        {
+                            if( y == inimigos[i][0]&& x== 1)
+                            {
+                            mapa[x, y] = '.';
+                            }                 
+                        }
                     }
                 }
-            }
-            mapa[playerX, playerY] = '>';
-            mapa[playerX - 1, playerY] = '|';
+            mapa[player.x, player.y] = '>';
+            mapa[player.x - 1, player.y] = '|';
 
 
         }
@@ -225,35 +250,41 @@ namespace makarovproject
         }
 
 
+            
+
         static void AtualizarPosicao(ConsoleKey tecla)
         {
-            int tempX = playerX;
-            int tempY = playerY;
-            switch (tecla)
+            player.movimentar(tecla);
+
+             //movimentação do inimigos
+
+             Random random = new Random();
+            for (int i = 0; i < 1; i++)
             {
-                case ConsoleKey.A:
-                    tempX--;
-                    break;
-                case ConsoleKey.S:
-                    tempY++;
-                    break;
-                case ConsoleKey.D:
-                    tempX++;
-                    break;
-                case ConsoleKey.W:
-                    tempY--;
-                    break;
+                int tempx = inimigos[i][1];//inimigo x
+                int tempy = inimigos[i][0];//inimigo y
+
+
+                //posições aleatórias
+                int y = random.Next(-1, 2);
+                int x = random.Next(-1, 2);
+                //pos. Y
+                if (inimigos[i][0] + y > 0 && inimigos[i][0] + y < 19)
+                {
+                    inimigos[i][0] += y;
+                }
+                //pos. X
+                if (inimigos[i][1] + x > 0 && inimigos[i][1] + x < 49)
+                {
+                    inimigos[i][1] += x;
+                }
+                mapa[tempx, tempy] = '.'; 
+                tempx = inimigos[i][1];
+                tempy = inimigos[i][0];
+                mapa[tempx, tempy] = 'K';
             }
 
-            if (mapa[tempX, tempY] != '#' && mapa[tempX - 1, tempY] != '#')
-            {
-                mapa[playerX, playerY] = '.';
-                mapa[playerX - 1, playerY] = '.';
-                mapa[tempX, tempY] = '>';
-                mapa[tempX - 1, tempY] = '|';
-                playerX = tempX;
-                playerY = tempY;
-            }
+
         }
 
     }
