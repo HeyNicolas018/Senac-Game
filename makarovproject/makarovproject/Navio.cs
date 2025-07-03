@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
+using System.Runtime.ConstrainedExecution;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,16 +15,16 @@ namespace makarovproject
         
         public int x;
         public int y;
-        int[][] myInimigos;
+        List<Inimigo> myInimigos = new List<Inimigo>();
         char[,] mapa;
 
-        char forma = '+';
+        string forma = "|>";
 
-        public Navio(int x, int y, int[][] inimigos, char[,]mapa)
+        public Navio(int x, int y, List<Inimigo> myInimigos, char[,]mapa)
         {
             this.x = x;
             this.y = y;
-            this.myInimigos = inimigos;
+            this.myInimigos = myInimigos;
             this.mapa = mapa;
         }
         
@@ -51,17 +52,24 @@ namespace makarovproject
             }
 
             //movimentação do player principal
-            if (mapa[tempX, tempY] != '#' && mapa[tempX - 1, tempY] != '#')
+            if (mapa[tempX, tempY] != '#' && mapa[tempX + 1, tempY] != '#' && mapa[tempX +1, tempY] != '#' && mapa[tempX, tempY] != '#' && mapa[tempX, tempY ] != '#')
             {
-                mapa[x, y] = '.';
-                mapa[x - 1, y] = '.';
-                mapa[tempX, tempY] = '>';
-                mapa[tempX - 1, tempY] = '|';
                 x = tempX;
                 y = tempY;
+                desenha();
             }
 
         }
+        public void desenha()
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+
+            Console.SetCursorPosition(x, y);
+            Console.WriteLine(forma);
+            Console.ResetColor();
+        }
+
+
 
 
     }

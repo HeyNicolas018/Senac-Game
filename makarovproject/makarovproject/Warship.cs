@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Security.Cryptography.X509Certificates;
 
@@ -12,12 +13,11 @@ namespace makarovproject
         static Navio player;
         static bool jogando = true;
         static ConsoleColor corEscolhida = ConsoleColor.White;
-        static int[][] inimigos;
+        public static List<Inimigo> myInimigos = new List<Inimigo>();
 
 
 
 
-        
         public static void Main()
         {
             /*
@@ -37,7 +37,7 @@ namespace makarovproject
 
                 //Jogar
                 Console.WriteLine("                      _  ___   ____    _    ____\r\n                     | |/ _ \\ / ___|  / \\  |  _ \\\r\n                  _  | | | | | |  _  / _ \\ | |_)\r\n                 | |_| | |_| | |_| |/ ___ \\|  _ <\r\n                  \\___/ \\___/ \\____/_/   \\_\\_| \\_\\");
-
+                
                 //Configuracao
                 Console.WriteLine("  ____ ___  _   _ _____ ___ ____ _   _ ____      _    ____ ___  _____ ____\r\n / ___/ _ \\| \\ | |  ___|_ _/ ___| | | |  _ \\    / \\  / ___/ _ \\| ____/ ___|\r\n| |  | | | |  \\| | |_   | | |  _| | | | |_) |  / _ \\| |  | | | |  _| \\___ \\\r\n| |__| |_| | |\\  |  _|  | | |_| | |_| |  _ <  / ___ \\ |__| |_| | |___ ___) |\r\n \\____\\___/|_| \\_|_|   |___\\____|\\___/|_| \\_\\/_/   \\_\\____\\___/|_____|____/");
 
@@ -51,17 +51,17 @@ namespace makarovproject
                 switch (tecla)
                 {
                     case "1":
-                        Console.WriteLine("Opção jogar escolhida");
+                        //Opção jogar
                         jogar();
                         break;
 
                     case "2":
-                        Console.WriteLine("Essa opção faz com que você possa escolher as cores do terminal!.");
+                        //Essa opção faz com que você possa escolher as cores do terminal
                         EscolherCor();
                         break;
 
                     case "3":
-                        Console.WriteLine("Estes são os créditos!");
+                        //Estes são os créditos
                         creditoJogador();
                         break;
 
@@ -69,21 +69,7 @@ namespace makarovproject
                         Console.WriteLine("Você escolheu sair. Obrigado por jogar e até a próxima!! xD");
                         break;
 
-                    case "w":
-                        Console.WriteLine("Cima");
-                        break;
 
-                    case "a":
-                        Console.WriteLine("Esquerda");
-                        break;
-
-                    case "s":
-                        Console.WriteLine("Baixo");
-                        break;
-
-                    case "d":
-                        Console.WriteLine("Direita");
-                        break;
                 }
             } while (tecla != "4");
             // Console.WriteLine("............................................................................  \r\n.............................................................. |//>..........\r\n.............|//>...........................................................\r\n............................................................................\r\n.................................................+=>........................\r\n...........................|>......................................[ ]>.....\r\n............................................................................\r\n.......|>...................................................................\r\n............................................................................\r\n.................................................|>.........................\r\n..................................<\\\\|......................................\r\n......|/>...................................................................\r\n............................................................................\r\n.......................|>......................................<=+..........\r\n.........|//>...............................................................\r\n...........................................<|...............................\r\n.............................................................=>.............\r\n....................+ |> + .................................................");
@@ -176,11 +162,12 @@ namespace makarovproject
 
         static void jogar()
         {
+            Console.Clear();
             iniciarMapa();
             while (jogando)
             {
 
-                Console.Clear();
+                Console.SetCursorPosition(0, 0);
                 desenhaMapa();
 
                 var tecla = Console.ReadKey(true).Key;
@@ -194,46 +181,34 @@ namespace makarovproject
         {
             mapa = new char[largura, altura];
 
-            //cria inimigos
-            inimigos = new int[5][];
 
-            Random random = new Random();
+            Random random = new Random(); 
             for (int i = 0; i < 5; i++)
             {
-                inimigos[i] = new int [5];
-                inimigos[i][0] = random.Next(1, 20);
-                inimigos[i][1] = random.Next(1, 50);
+                int x = random.Next(1 , 49);
+                int y = random.Next(1, 19);
+                myInimigos.Add(new Inimigo("x", x, y , ConsoleColor.Red));
             }
             //finaliza
+            
+            player = new Navio(24 , 10, myInimigos, mapa);
 
-            player = new Navio(24 , 10, inimigos, mapa); 
-
-                for (int x = 0; x < largura; x++)
+            for (int x = 0; x < largura; x++)
+            {
+                for (int y = 0; y < altura; y++)
                 {
-                    for (int y = 0; y < altura; y++)
+                    //Ultima posiçao do vetor é tamanho - 1
+                    if (x == 0 || y == 0 || x == largura - 1 || y == altura - 1)
                     {
-                        //Ultima posiçao do vetor é tamanho - 1
-                        if (x == 0 || y == 0 || x == largura - 1 || y == altura - 1)
-                        {
-                            mapa[x, y] = '#';
-                        }
-                        else
-                        {
-                            mapa[x, y] = '.';
-                        }                       
-                        for (int i = 0; i < 1; i++)
-                        {
-                            if( y == inimigos[i][0]&& x== 1)
-                            {
-                            mapa[x, y] = '.';
-                            }                 
-                        }
+                        mapa[x, y] = '#';
                     }
+                    else
+                    {
+                        mapa[x, y] = '.';
+                    }
+
                 }
-            mapa[player.x, player.y] = '>';
-            mapa[player.x - 1, player.y] = '|';
-
-
+            }
         }
         //Desenha o Mapa
         static void desenhaMapa()
@@ -247,6 +222,14 @@ namespace makarovproject
                 }
                 Console.WriteLine();
             }
+
+
+            foreach(var i in myInimigos)
+            {
+                i.desenha();
+            }
+
+            player.desenha();
         }
 
 
@@ -256,33 +239,13 @@ namespace makarovproject
         {
             player.movimentar(tecla);
 
-             //movimentação do inimigos
+            //movimentação do inimigos
 
-             Random random = new Random();
-            for (int i = 0; i < 1; i++)
+            foreach (var i in myInimigos)
             {
-                int tempx = inimigos[i][1];//inimigo x
-                int tempy = inimigos[i][0];//inimigo y
-
-
-                //posições aleatórias
-                int y = random.Next(-1, 2);
-                int x = random.Next(-1, 2);
-                //pos. Y
-                if (inimigos[i][0] + y > 0 && inimigos[i][0] + y < 19)
-                {
-                    inimigos[i][0] += y;
-                }
-                //pos. X
-                if (inimigos[i][1] + x > 0 && inimigos[i][1] + x < 49)
-                {
-                    inimigos[i][1] += x;
-                }
-                mapa[tempx, tempy] = '.'; 
-                tempx = inimigos[i][1];
-                tempy = inimigos[i][0];
-                mapa[tempx, tempy] = 'K';
+                i.Update();
             }
+
 
 
         }
