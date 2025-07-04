@@ -20,12 +20,12 @@ namespace makarovproject
 
         string forma = "|>";
 
-        public Navio(int x, int y, List<Inimigo> myInimigos, char[,]mapa)
+        public Navio(int x, int y, List<Inimigo> myInimigos)
         {
             this.x = x;
             this.y = y;
             this.myInimigos = myInimigos;
-            this.mapa = mapa;
+            this.mapa = Mapa.Instance.mapa;
         }
         
         public void movimentar(ConsoleKey tecla)
