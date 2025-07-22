@@ -16,17 +16,18 @@ namespace makarovproject
 
 
 
-        public char[,] mapa;
-        public int largura = 50;
-        public int altura = 20;
+        
         public Navio player;
         public bool jogando = true;
         public ConsoleColor corEscolhida = ConsoleColor.White;
 
         public List<Inimigo> myInimigos = new List<Inimigo>();
 
-
-        public void Start() {
+        public void Start()
+        {
+            Menu();
+        }
+        public void Menu() {
 
             /*
             if () { }
@@ -84,6 +85,8 @@ namespace makarovproject
 
 
         }
+
+       
 
 
 
@@ -176,21 +179,13 @@ namespace makarovproject
         public void jogar()
         {
             Console.Clear();
-
             Mapa.Instance.iniciar();
-
             player = new Navio(24, 10, myInimigos);
-
-
             while (jogando)
             {
                 Console.SetCursorPosition(0, 0);
                 Mapa.Instance.desenharMapa();
                 player.desenha();
-
-
-
-
                 var tecla = Console.ReadKey(true).Key;
                 player.movimentar(tecla);
                 Mapa.Instance.AtualizarPosicao();

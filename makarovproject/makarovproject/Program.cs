@@ -2,11 +2,16 @@
 //Console.WriteLine("Para o meu programa, Olá mundo!");
 
 
-namespace makarovproject{
+using System.Numerics;
 
-    class Aulas {
+namespace makarovproject
+{
 
-        public static void ShowVariables() {
+    class Aulas
+    {
+
+        public static void ShowVariables()
+        {
 
 
             //uso inteiro
@@ -33,6 +38,11 @@ namespace makarovproject{
 
             /*  TIPO BOOLEANOS */
             bool playing;
+
+
+
+
+
         }
     }
 }

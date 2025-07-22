@@ -12,9 +12,7 @@ namespace makarovproject
     
     class Navio
     {
-        
-        public int x;
-        public int y;
+        Vector2 pos = new Vector2(1, 1);
         List<Inimigo> myInimigos = new List<Inimigo>();
         char[,] mapa;
 
@@ -22,8 +20,6 @@ namespace makarovproject
 
         public Navio(int x, int y, List<Inimigo> myInimigos)
         {
-            this.x = x;
-            this.y = y;
             this.myInimigos = myInimigos;
             this.mapa = Mapa.Instance.mapa;
         }
@@ -31,40 +27,42 @@ namespace makarovproject
         public void movimentar(ConsoleKey tecla)
         {
             
-            int tempX = x;
-            int tempY = y;
+            int tempX = pos.x;
+            int tempY = pos.y;
+            int x = pos.x;
+            int y = pos.y;
 
             switch (tecla)
             {
                 case ConsoleKey.A:
-                    tempX -= 1;
+                    x = pos.Left;
                     break;
-
                 case ConsoleKey.D:
-                    tempX += 1;
+                    x = pos.Right;
                     break;
                 case ConsoleKey.S:
-                    tempY += 1;
+                    y = pos.Down;
                     break;
                 case ConsoleKey.W:
-                    tempY -= 1;
+                    y = pos.Up;
                     break;
             }
 
             //movimentação do player principal
-            if (mapa[tempX, tempY] != '#' && mapa[tempX + 1, tempY] != '#' && mapa[tempX +1, tempY] != '#' && mapa[tempX, tempY] != '#' && mapa[tempX, tempY ] != '#')
+            if (mapa[x, y] == '#' || mapa[x + 1, y] == '#' || mapa[x - 1, y] == '#' )
             {
-                x = tempX;
-                y = tempY;
-                desenha();
+                pos.x = tempX;
+                pos.y = tempY;
+                
             }
+            desenha();
 
         }
         public void desenha()
         {
             Console.ForegroundColor = ConsoleColor.Green;
 
-            Console.SetCursorPosition(x, y);
+            Console.SetCursorPosition(pos.x , pos.y);
             Console.WriteLine(forma);
             Console.ResetColor();
         }
