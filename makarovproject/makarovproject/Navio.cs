@@ -10,7 +10,7 @@ namespace makarovproject
 {
     
     
-    class Navio
+    class Navio : Monobehaviour
     {
         Vector2 pos = new Vector2(1, 1);
         List<Inimigo> myInimigos = new List<Inimigo>();
@@ -23,7 +23,11 @@ namespace makarovproject
             this.myInimigos = myInimigos;
             this.mapa = Mapa.Instance.mapa;
         }
-        
+        public override void Update()
+        {
+            desenha();
+        }
+
         public void movimentar(ConsoleKey tecla)
         {
             
@@ -61,14 +65,9 @@ namespace makarovproject
         public void desenha()
         {
             Console.ForegroundColor = ConsoleColor.Green;
-
             Console.SetCursorPosition(pos.x , pos.y);
             Console.WriteLine(forma);
             Console.ResetColor();
         }
-
-
-
-
     }
 }

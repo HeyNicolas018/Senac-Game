@@ -7,9 +7,11 @@ using System.Threading.Tasks;
 
 namespace makarovproject
 {
-    class Mapa
+    class Mapa : Monobehaviour
     {
-        private Mapa() { }
+        private Mapa() {
+            Run();
+        }
         private static Mapa instance;
         public static Mapa Instance => instance ??= new Mapa();
         
@@ -17,7 +19,7 @@ namespace makarovproject
         public int largura = 50;
         public int altura = 20;
 
-        public ConsoleColor corEscolhida = ConsoleColor.White;
+        public ConsoleColor corEscolhida = GameManager.Instance.corEscolhida;
         public List<Inimigo> myInimigos = new List<Inimigo>();
 
 
@@ -65,8 +67,10 @@ namespace makarovproject
             }
         }
         //Desenha o Mapa
+        
         public void desenharMapa()
         {
+
             Console.ForegroundColor = corEscolhida;
             for (int y = 0; y < altura; y++)
             {
@@ -85,9 +89,18 @@ namespace makarovproject
             }
 
         }
+        /*
+        public override void Start()
+        {
+            iniciar();
+        }
+        
+        public override void Update() {          
+            desenharMapa();
+        }
+ */
         public void AtualizarPosicao()
         {
-
             //movimentação do inimigos
 
             foreach (var i in myInimigos)
