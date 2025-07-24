@@ -18,9 +18,10 @@ namespace makarovproject
         public char[,] mapa;
         public int largura = 50;
         public int altura = 20;
-
-        public ConsoleColor corEscolhida = GameManager.Instance.corEscolhida;
+        
+        public ConsoleColor corEscolhida = EscolherCores.selecionaCor.corEscolhida;
         public List<Inimigo> myInimigos = new List<Inimigo>();
+
 
 
         public void iniciar()
@@ -28,30 +29,17 @@ namespace makarovproject
             
             mapa = new char[largura, altura];
 
-            Random random = new Random();
-
-            int x = random.Next(1, 49);
-            int y = random.Next(1, 19);
-            myInimigos.Add(new Inimigo("|>", x, y, ConsoleColor.Red));
-
-            
+            myInimigos.Add(new Inimigo("|>",  ConsoleColor.Red));
             for (int i = 0; i < 5; i++)
             {
-                x = random.Next(1, 49);
-                y = random.Next(1, 19);
-                myInimigos.Add(new Inimigo("|x", x, y, ConsoleColor.Red));
+                myInimigos.Add(new Inimigo("|//>", ConsoleColor.Red));
             }
 
-             x = random.Next(1, 49);
-             y = random.Next(1, 19);
-            myInimigos.Add(new Inimigo("|//>", x, y, ConsoleColor.Red));
-            //finaliza
+            myInimigos.Add(new Inimigo("|x", ConsoleColor.Red));
 
-
-
-            for ( x = 0; x < largura; x++)
+            for (int x = 0; x < largura; x++)
             {
-                for ( y = 0; y < altura; y++)
+                for (int y = 0; y < altura; y++)
                 {
                     //Ultima posiçao do vetor é tamanho - 1
                     if (x == 0 || y == 0 || x == largura - 1 || y == altura - 1)
@@ -66,11 +54,10 @@ namespace makarovproject
                 }
             }
         }
-        //Desenha o Mapa
         
         public void desenharMapa()
         {
-
+            Console.SetCursorPosition(0,0);
             Console.ForegroundColor = corEscolhida;
             for (int y = 0; y < altura; y++)
             {
@@ -81,28 +68,30 @@ namespace makarovproject
                 }
                 Console.WriteLine();
             }
-
-
+            
             foreach (var i in myInimigos)
             {
-                i.desenha();
+              i.desenha();
             }
-
+            
         }
-        /*
+
+        
         public override void Start()
         {
             iniciar();
         }
-        
-        public override void Update() {          
-            desenharMapa();
+
+        public override void Update()
+        {
+            AtualizarPosicao();
         }
- */
+
+
+
         public void AtualizarPosicao()
         {
             //movimentação do inimigos
-
             foreach (var i in myInimigos)
             {
                 i.Update();

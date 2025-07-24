@@ -23,7 +23,7 @@ namespace makarovproject
                     {
                         Update();
                         LateUpdate();
-                        Thread.Sleep(100);                        
+                        Thread.Sleep(50);                        
                     }
                     OnDestroy();
                 }

@@ -13,18 +13,24 @@ namespace makarovproject
     class Navio : Monobehaviour
     {
         Vector2 pos = new Vector2(1, 1);
-        List<Inimigo> myInimigos = new List<Inimigo>();
-        char[,] mapa;
+        
 
         string forma = "|>";
 
-        public Navio(int x, int y, List<Inimigo> myInimigos)
+        public Navio()
         {
-            this.myInimigos = myInimigos;
-            this.mapa = Mapa.Instance.mapa;
+            Run();
         }
+
+
+        public override void Start()
+        {
+            Console.Clear();
+        }
+
         public override void Update()
         {
+            Mapa.Instance.desenharMapa();
             desenha();
         }
 
@@ -53,13 +59,12 @@ namespace makarovproject
             }
 
             //movimentação do player principal
-            if (mapa[x, y] == '#' || mapa[x + 1, y] == '#' || mapa[x - 1, y] == '#' )
+            if (Mapa.Instance.mapa[x, y] == '#' || Mapa.Instance.mapa[x + 1, y] == '#' || Mapa.Instance.mapa[x - 1, y] == '#' )
             {
                 pos.x = tempX;
                 pos.y = tempY;
                 
             }
-            desenha();
 
         }
         public void desenha()

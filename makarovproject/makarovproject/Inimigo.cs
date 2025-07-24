@@ -17,11 +17,15 @@ namespace makarovproject
 
         public ConsoleColor cor { get; set; }
 
-
-        public Inimigo(string forma, int x, int y, ConsoleColor cor) {
+        public Inimigo(string forma, ConsoleColor cor) {
             this.forma = forma;
-            this.x = x;
-            this.y = y;
+
+            Random random = new Random();
+
+            this.x = random.Next(1, Mapa.Instance.largura - forma.Length - 1); 
+
+            this.y = random.Next(1, Mapa.Instance.altura - 1);
+
             this.cor = cor;
         }
 
@@ -30,7 +34,6 @@ namespace makarovproject
         public void desenha()
         {
             Console.ForegroundColor = cor;
-
             Console.SetCursorPosition(x, y);
             Console.WriteLine(forma);
             Console.ResetColor();
@@ -46,17 +49,15 @@ namespace makarovproject
             int ry = random.Next(-1, 2);
             int rx = random.Next(-1, 2);
             //pos. Y
-            if (ry + y > 0 && ry + y < 19)
+            if (ry + y > 0 && ry + y < Mapa.Instance.altura - 1)
             {
                 y += ry;
             }
             //pos. X
-            if (x + rx > 0 && x + rx < 49)
+            if (x + rx > 0 && x + rx + forma.Length < Mapa.Instance.largura - 2)
             {
                 x += rx;
             }
-
-            desenha();
         }
        
     }

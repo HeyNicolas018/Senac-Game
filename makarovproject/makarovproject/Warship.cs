@@ -10,7 +10,7 @@ namespace makarovproject
 
         public static void Main()
         {
-            GameManager.Instance.Start();
+            GameManager m = GameManager.Instance;
         }
     }
 
