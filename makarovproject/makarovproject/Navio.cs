@@ -30,9 +30,12 @@ namespace makarovproject
 
         public override void Update()
         {
-            Mapa.Instance.desenharMapa();
-            desenha();
+            if (!input) return;
+
+            var tecla = Console.ReadKey(true).Key;
+            movimentar(tecla);
         }
+
 
         public void movimentar(ConsoleKey tecla)
         {
@@ -56,6 +59,20 @@ namespace makarovproject
                 case ConsoleKey.W:
                     y = pos.Up;
                     break;
+                case ConsoleKey.M:
+
+                    GameManager.Instance.map = Mapa.Instance;
+                    GameManager.Instance.player.visible = false;
+
+                    GameManager.Instance.diamante.visible = true;
+                    GameManager.Instance.diamante.input = true;
+
+                    GameManager.Instance.player.visible = false;
+                    GameManager.Instance.player.visible = false;
+                    GameManager.Instance.player.Stop();
+
+
+                    break;
             }
 
             //movimentação do player principal
@@ -67,12 +84,14 @@ namespace makarovproject
             }
 
         }
-        public void desenha()
+        public override void Draw()
         {
             Console.ForegroundColor = ConsoleColor.Green;
             Console.SetCursorPosition(pos.x , pos.y);
             Console.WriteLine(forma);
             Console.ResetColor();
         }
+
+
     }
 }

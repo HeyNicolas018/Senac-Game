@@ -7,17 +7,60 @@ using System.Threading.Tasks;
 
 namespace makarovproject
 {
-    class MenuJogo
+    class MenuJogo : Monobehaviour
     {
-        public MenuJogo() { }
+        public MenuJogo() {
+            Run();
+
+        }
 
         static private MenuJogo myMenu;
 
         public static MenuJogo Mymenu => myMenu ??= new MenuJogo();
 
+        public override void Update()
+        {
+            if (!input) return;
+             var tecla = Console.ReadKey().Key;
+            switch (tecla)
+            {
+                case ConsoleKey.NumPad1:
+                case ConsoleKey.D1:
 
+                    //Opção jogar
+                    GameManager.Instance.map = Mapa.Instance;
+                    GameManager.Instance.map.visible = true;
 
-        public void MeuMenu()
+                    GameManager.Instance.player = new Navio();
+                    GameManager.Instance.player.visible = true;
+                    GameManager.Instance.player.input = true;
+
+                    GameManager.Instance.diamante.visible = false;
+                    GameManager.Instance.diamante.input = false;
+                    break;
+
+                case ConsoleKey.NumPad2:
+                case ConsoleKey.D2:
+                    //Essa opção faz com que você possa escolher as cores do terminal
+                    GameManager.Instance.cores = EscolherCores.selecionaCor;
+                    GameManager.Instance.cores.visible = true;
+                    break;
+
+                case ConsoleKey.NumPad3:
+                case ConsoleKey.D3:
+                    //Estes são os créditos
+                    GameManager.Instance.creditoJogador();
+                    break;
+
+                case ConsoleKey.NumPad4:
+                case ConsoleKey.D4:
+                    Console.WriteLine("Você escolheu sair. Obrigado por jogar e até a próxima!! xD");
+                    break;
+
+            }
+        }
+
+        public override void Draw()
         {
 
             EscolherCores.selecionaCor.corConfirmada();
@@ -37,33 +80,7 @@ namespace makarovproject
             //Sair
             Console.WriteLine("                        ____    _    ___ ____\r\n                       / ___|  / \\  |_ _|  _ \\\r\n                       \\___ \\ / _ \\  | || |_)\r\n                        ___) / ___ \\ | ||  _ <\r\n                       |____/_/   \\_\\___|_| \\_\\");
 
-            var tecla = Console.ReadKey().Key;
-            switch (tecla)
-            {
-                case ConsoleKey.NumPad1:
-                case ConsoleKey.D1:
-                    //Opção jogar
-                    GameManager.Instance.jogar();
-                    break;
-
-                case ConsoleKey.NumPad2:
-                case ConsoleKey.D2:
-                    //Essa opção faz com que você possa escolher as cores do terminal
-                    EscolherCores.selecionaCor.EscolherCor();
-                    break;
-
-                case ConsoleKey.NumPad3:
-                case ConsoleKey.D3:
-                    //Estes são os créditos
-                    GameManager.Instance.creditoJogador();
-                    break;
-
-                case ConsoleKey.NumPad4:
-                case ConsoleKey.D4:
-                    Console.WriteLine("Você escolheu sair. Obrigado por jogar e até a próxima!! xD");
-                    break;
-
-            }
+           
             
         }
     }

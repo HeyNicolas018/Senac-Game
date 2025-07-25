@@ -12,6 +12,11 @@ namespace makarovproject
         private Thread t;
         private bool active = true;
 
+        public bool visible = false;
+        public bool input = false;
+
+
+
         public void Run()
         {
             Awake();
@@ -24,8 +29,7 @@ namespace makarovproject
                         Update();
                         LateUpdate();
                         Thread.Sleep(50);                        
-                    }
-                    OnDestroy();
+                    }                    
                 }
             );
             t.Start();
@@ -34,6 +38,7 @@ namespace makarovproject
         public void Stop()
         {
             this.active = false;
+            OnDestroy();
             t.Join();
         }
 
@@ -42,6 +47,8 @@ namespace makarovproject
         public virtual void Update() { }
         public virtual void LateUpdate() { }
         public virtual void OnDestroy() { }
+
+        public abstract void Draw();
 
 
     }

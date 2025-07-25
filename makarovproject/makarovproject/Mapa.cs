@@ -35,7 +35,7 @@ namespace makarovproject
                 myInimigos.Add(new Inimigo("|//>", ConsoleColor.Red));
             }
 
-            myInimigos.Add(new Inimigo("|x", ConsoleColor.Red));
+            myInimigos.Add(new Inimigo("|/>", ConsoleColor.Red));
 
             for (int x = 0; x < largura; x++)
             {
@@ -55,7 +55,7 @@ namespace makarovproject
             }
         }
         
-        public void desenharMapa()
+        public override void Draw()
         {
             Console.SetCursorPosition(0,0);
             Console.ForegroundColor = corEscolhida;

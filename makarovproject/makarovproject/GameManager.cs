@@ -20,6 +20,9 @@ namespace makarovproject
 
         
         public Navio player;
+        public MenuJogo diamante;
+        public Mapa map;
+        public EscolherCores cores;
         public bool jogando = false;
         
 
@@ -28,17 +31,14 @@ namespace makarovproject
 
         public override void Update()
         {
+            Draw();          
+        }
 
-            if (jogando)
-            {
-                var tecla = Console.ReadKey().Key;
-                player.movimentar(tecla);
-            } else
-            {
-                Console.Clear();
-                MenuJogo.Mymenu.MeuMenu();
-            }
-            
+        public override void Start()
+        {
+            diamante = MenuJogo.Mymenu;
+            diamante.visible = true;
+            diamante.input = true;
         }
 
         public void creditoJogador()
@@ -57,6 +57,16 @@ namespace makarovproject
             jogando = true;
             
             player = new Navio();
+
+        }
+
+        public override void Draw()
+        {
+
+            if (map != null && map.visible) map.Draw();
+            if (player != null && player.visible) player.Draw();          
+            if (diamante != null && diamante.visible) diamante.Draw();
+            if (cores != null && cores.visible) cores.Draw();
 
         }
     }

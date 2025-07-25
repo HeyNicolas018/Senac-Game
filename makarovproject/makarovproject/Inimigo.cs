@@ -17,14 +17,14 @@ namespace makarovproject
 
         public ConsoleColor cor { get; set; }
 
+        static Random random = new Random();
+
         public Inimigo(string forma, ConsoleColor cor) {
             this.forma = forma;
+            
+            this.x = random.Next(1, 50 - this.forma.Length - 1); 
 
-            Random random = new Random();
-
-            this.x = random.Next(1, Mapa.Instance.largura - forma.Length - 1); 
-
-            this.y = random.Next(1, Mapa.Instance.altura - 1);
+            this.y = random.Next(1, 20 - 1);
 
             this.cor = cor;
         }
