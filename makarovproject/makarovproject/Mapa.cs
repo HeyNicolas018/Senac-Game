@@ -22,7 +22,7 @@ namespace makarovproject
         public ConsoleColor corEscolhida = EscolherCores.selecionaCor.corEscolhida;
         public List<Inimigo> myInimigos = new List<Inimigo>();
 
-
+       
 
         public void iniciar()
         {

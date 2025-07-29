@@ -42,8 +42,19 @@ namespace makarovproject
                 case ConsoleKey.NumPad2:
                 case ConsoleKey.D2:
                     //Essa opção faz com que você possa escolher as cores do terminal
+
+                    
+                    GameManager.Instance.map = Mapa.Instance;
+                    GameManager.Instance.map.visible = false;
+                    GameManager.Instance.map.input = false;
+
+                    GameManager.Instance.diamante.visible = false;
+                    GameManager.Instance.diamante.input = false;
+                    
                     GameManager.Instance.cores = EscolherCores.selecionaCor;
                     GameManager.Instance.cores.visible = true;
+                    GameManager.Instance.cores.input = true;
+                    
                     break;
 
                 case ConsoleKey.NumPad3:

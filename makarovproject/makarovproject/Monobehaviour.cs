@@ -27,8 +27,9 @@ namespace makarovproject
                 while (active)
                     {
                         Update();
-                        LateUpdate();
-                        Thread.Sleep(50);                        
+                        LateUpdate();                        
+                        Thread.Sleep(2000);
+                        
                     }                    
                 }
             );

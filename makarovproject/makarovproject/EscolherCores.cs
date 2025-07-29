@@ -9,7 +9,9 @@ namespace makarovproject
 {
     class EscolherCores : Monobehaviour
     {
-        public EscolherCores() { } 
+        public EscolherCores() {
+            Run();
+        } 
 
         private static EscolherCores metodoCor;
 
@@ -18,7 +20,7 @@ namespace makarovproject
 
         public override void Draw()
         {
-            corConfirmada();
+            
             Console.WriteLine("Aqui você tem a informação de teclas que mudam a cor e dá a possibilidade de escolher o que você vai querer no terminal.\r\nAs teclas para as cores são: ");
             //Número 1
             ManterCor("  _          __     _______ ____  __  __ _____ _     _   _  ___  \r\n / |         \\ \\   / / ____|  _ \\|  \\/  | ____| |   | | | |/ _ \\ \r\n | |  _____   \\ \\ / /|  _| | |_) | |\\/| |  _| | |   | |_| | | | |\r\n | | |_____|   \\ V / | |___|  _ <| |  | | |___| |___|  _  | |_| |\r\n |_|            \\_/  |_____|_| \\_\\_|  |_|_____|_____|_| |_|\\___/ \r\n                                                                 ", ConsoleColor.Red);
@@ -36,7 +38,7 @@ namespace makarovproject
 
         public void corConfirmada()
         {
-            Console.Clear();
+            Console.SetCursorPosition(0,0);
             Console.ForegroundColor = corEscolhida;
         }
 
@@ -60,10 +62,7 @@ namespace makarovproject
                     string confi = Console.ReadLine();
                     if (confi == "y")
                     {
-
                         corEscolhida = ConsoleColor.Red;
-
-
                     }
                     break;
 
