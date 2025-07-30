@@ -59,9 +59,11 @@ namespace makarovproject
                 case ConsoleKey.W:
                     y = pos.Up;
                     break;
-                case ConsoleKey.M:
+                case ConsoleKey.X:
 
                     GameManager.Instance.map = Mapa.Instance;
+                    GameManager.Instance.map.visible = false;
+                    GameManager.Instance.map.input = false; 
                     GameManager.Instance.player.visible = false;
 
                     GameManager.Instance.diamante.visible = true;

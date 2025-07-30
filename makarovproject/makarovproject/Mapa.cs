@@ -11,13 +11,15 @@ namespace makarovproject
     {
         private Mapa() {
             Run();
+
+
         }
         private static Mapa instance;
         public static Mapa Instance => instance ??= new Mapa();
         
         public char[,] mapa;
-        public int largura = 50;
-        public int altura = 20;
+        public int largura = 120;
+        public int altura = 29;
         
         public ConsoleColor corEscolhida = EscolherCores.selecionaCor.corEscolhida;
         public List<Inimigo> myInimigos = new List<Inimigo>();
@@ -30,7 +32,7 @@ namespace makarovproject
             mapa = new char[largura, altura];
 
             myInimigos.Add(new Inimigo("|>",  ConsoleColor.Red));
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 10; i++)
             {
                 myInimigos.Add(new Inimigo("|//>", ConsoleColor.Red));
             }
@@ -76,7 +78,7 @@ namespace makarovproject
             
         }
 
-        
+   
         public override void Start()
         {
             iniciar();
@@ -86,9 +88,6 @@ namespace makarovproject
         {
             AtualizarPosicao();
         }
-
-
-
         public void AtualizarPosicao()
         {
             //movimentação do inimigos

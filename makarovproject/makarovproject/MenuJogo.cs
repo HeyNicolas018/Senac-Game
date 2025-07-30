@@ -30,6 +30,8 @@ namespace makarovproject
                     //Opção jogar
                     GameManager.Instance.map = Mapa.Instance;
                     GameManager.Instance.map.visible = true;
+                    GameManager.Instance.map.input = true;
+                    
 
                     GameManager.Instance.player = new Navio();
                     GameManager.Instance.player.visible = true;
@@ -41,9 +43,8 @@ namespace makarovproject
 
                 case ConsoleKey.NumPad2:
                 case ConsoleKey.D2:
-                    //Essa opção faz com que você possa escolher as cores do terminal
 
-                    
+                    //Essa opção faz com que você possa escolher as cores do terminal                  
                     GameManager.Instance.map = Mapa.Instance;
                     GameManager.Instance.map.visible = false;
                     GameManager.Instance.map.input = false;
@@ -54,20 +55,53 @@ namespace makarovproject
                     GameManager.Instance.cores = EscolherCores.selecionaCor;
                     GameManager.Instance.cores.visible = true;
                     GameManager.Instance.cores.input = true;
-                    
+
                     break;
 
                 case ConsoleKey.NumPad3:
                 case ConsoleKey.D3:
                     //Estes são os créditos
-                    GameManager.Instance.creditoJogador();
+                    GameManager.Instance.map = Mapa.Instance;
+                    GameManager.Instance.map.visible = false;
+                    GameManager.Instance.map.input = false;
+
+                    GameManager.Instance.diamante.visible = false;
+                    GameManager.Instance.diamante.input = false;
+
+                    GameManager.Instance.cores = EscolherCores.selecionaCor;
+                    GameManager.Instance.cores.visible = false;
+                    GameManager.Instance.cores.input = false;
+
+
+                    GameManager.Instance.creditos = CreditoJogador.Instance;
+                    GameManager.Instance.creditos.visible = true;
+                    GameManager.Instance.creditos.input = true;
+
                     break;
 
                 case ConsoleKey.NumPad4:
                 case ConsoleKey.D4:
-                    Console.WriteLine("Você escolheu sair. Obrigado por jogar e até a próxima!! xD");
-                    break;
+                    //Sair do jogo
+                    input = false;
+                    visible = false;
+                    ConsoleKey sairjogo;
+                    do
+                    {
+                        Console.WriteLine("\r\nDeseja sair do jogo?\r\nY para confirmar\r\nN para Cancelar ");
+                        sairjogo = Console.ReadKey(true).Key;
+                    }   while (sairjogo != ConsoleKey.Y && sairjogo != ConsoleKey.N);
 
+                    if (sairjogo == ConsoleKey.Y)
+                    {
+
+                        Console.WriteLine("Você escolheu sair. Obrigado por jogar e até a próxima!! xD");
+                        Environment.Exit(0);
+                    } else if(sairjogo == ConsoleKey.N)
+                    {
+                        GameManager.Instance.diamante.visible = true;
+                        GameManager.Instance.diamante.input = true;
+                    }
+                        break;
             }
         }
 
@@ -91,7 +125,7 @@ namespace makarovproject
             //Sair
             Console.WriteLine("                        ____    _    ___ ____\r\n                       / ___|  / \\  |_ _|  _ \\\r\n                       \\___ \\ / _ \\  | || |_)\r\n                        ___) / ___ \\ | ||  _ <\r\n                       |____/_/   \\_\\___|_| \\_\\");
 
-           
+            
             
         }
     }

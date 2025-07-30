@@ -22,9 +22,9 @@ namespace makarovproject
         public Inimigo(string forma, ConsoleColor cor) {
             this.forma = forma;
             
-            this.x = random.Next(1, 50 - this.forma.Length - 1); 
+            this.x = random.Next(1, 119 - this.forma.Length - 1); 
 
-            this.y = random.Next(1, 20 - 1);
+            this.y = random.Next(1, 29 - 1);
 
             this.cor = cor;
         }
