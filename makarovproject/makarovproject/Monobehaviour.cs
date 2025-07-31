@@ -11,25 +11,20 @@ namespace makarovproject
     {
         private Thread t;
         private bool active = true;
-
         public bool visible = false;
         public bool input = false;
-
-
 
         public void Run()
         {
             Awake();
             Start();
-
             t = new Thread(
                 () => {
                 while (active)
                     {
                         Update();
                         LateUpdate();                        
-                        Thread.Sleep(250);
-                        
+                        Thread.Sleep(80);                        
                     }                    
                 }
             );
@@ -48,9 +43,6 @@ namespace makarovproject
         public virtual void Update() { }
         public virtual void LateUpdate() { }
         public virtual void OnDestroy() { }
-
         public abstract void Draw();
-
-
     }
 }

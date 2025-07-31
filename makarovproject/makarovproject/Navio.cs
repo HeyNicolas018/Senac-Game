@@ -12,16 +12,14 @@ namespace makarovproject
     
     class Navio : Monobehaviour
     {
-        Vector2 pos = new Vector2(1, 1);
-        
-
+        public Vector2 pos = new Vector2(1, 1);      
         string forma = "|>";
-
+        public int ponto = 0;
+        public List<Bullet> bullets = new List<Bullet>();
         public Navio()
         {
             Run();
         }
-
 
         public override void Start()
         {
@@ -31,15 +29,12 @@ namespace makarovproject
         public override void Update()
         {
             if (!input) return;
-
             var tecla = Console.ReadKey(true).Key;
             movimentar(tecla);
         }
 
-
         public void movimentar(ConsoleKey tecla)
-        {
-            
+        {         
             int tempX = pos.x;
             int tempY = pos.y;
             int x = pos.x;
@@ -47,6 +42,17 @@ namespace makarovproject
 
             switch (tecla)
             {
+                case ConsoleKey.F:
+                    if (bullets.Count > 7)
+                    {
+                        Console.SetCursorPosition(20, 0);
+                        Console.WriteLine("Limite de balas atingido! ");
+                        return;
+                    }
+                    bullets.Add(new Bullet());
+                    break;
+
+
                 case ConsoleKey.A:
                     x = pos.Left;
                     break;
@@ -85,15 +91,40 @@ namespace makarovproject
                 
             }
 
+
+
+            foreach (var i in GameManager.Instance.map.myInimigos)
+            {
+                if (pos.x >= i.x && pos.x <= (i.x+i.forma.Length) && pos.y == i.y)
+                {
+                    GameManager.Instance.map.myInimigos.Remove(i);
+                    GameManager.Instance.player.visible = false;
+                    GameManager.Instance.player.input = false;
+
+                    GameManager.Instance.map.visible = false;
+                    GameManager.Instance.map.input = false;
+
+                    GameManager.Instance.diamante.visible = true;
+                    GameManager.Instance.diamante.input = true;
+
+                    Stop();
+                    break;
+                }
+            }
         }
+
         public override void Draw()
         {
             Console.ForegroundColor = ConsoleColor.Green;
             Console.SetCursorPosition(pos.x , pos.y);
             Console.WriteLine(forma);
             Console.ResetColor();
+            Console.SetCursorPosition(0, 0);
+            Console.WriteLine($"Pontos: {ponto} ");
+            foreach (var bullet in bullets)
+            {
+                bullet.Draw();
+            }
         }
-
-
     }
 }

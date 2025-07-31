@@ -1,6 +1,7 @@
 ﻿using makarovproject;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Numerics;
 
 namespace makarovproject
@@ -9,11 +10,8 @@ namespace makarovproject
     {
         public string forma { get; set; }
         public char disparo { get; set; }
-
-
         public int x { get; set; }
         public int y { get; set; }
-
 
         public ConsoleColor cor { get; set; }
 
@@ -29,8 +27,6 @@ namespace makarovproject
             this.cor = cor;
         }
 
-
-
         public void desenha()
         {
             Console.ForegroundColor = cor;
@@ -38,7 +34,6 @@ namespace makarovproject
             Console.WriteLine(forma);
             Console.ResetColor();
         }
-
 
         public void Update()
         {
@@ -58,7 +53,7 @@ namespace makarovproject
             {
                 x += rx;
             }
+
         }
-       
     }
  }

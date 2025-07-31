@@ -10,6 +10,7 @@ namespace makarovproject
 
         public static void Main()
         {
+            Console.CursorVisible = false;
             GameManager m = GameManager.Instance;
         }
     }

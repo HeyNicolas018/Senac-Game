@@ -15,9 +15,6 @@ namespace makarovproject
         public static CreditoJogador instance;
         public static CreditoJogador Instance => instance ??= new CreditoJogador();
 
-
-
-
         public override void Draw()
         {
             GameManager.Instance.cores.corConfirmada();
