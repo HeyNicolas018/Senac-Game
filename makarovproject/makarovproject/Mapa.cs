@@ -30,11 +30,10 @@ namespace makarovproject
             mapa = new char[largura, altura];
 
             myInimigos.Add(new Inimigo("|>",  ConsoleColor.Red));
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 20; i++)
             {
                 myInimigos.Add(new Inimigo("|//>", ConsoleColor.Red));
             }
-
             myInimigos.Add(new Inimigo("|/>", ConsoleColor.Red));
 
             for (int x = 0; x < largura; x++)
@@ -89,10 +88,16 @@ namespace makarovproject
         public void AtualizarPosicao()
         {
             //movimentação do inimigos
-            foreach (var i in myInimigos)
+            try
             {
-                i.Update();
+                foreach (var i in myInimigos)
+                {
+                    i.Update();
+                }
             }
-        } 
+            catch (Exception ex)
+            {
+            }
+        }
     }
 }

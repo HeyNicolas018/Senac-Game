@@ -24,7 +24,7 @@ namespace makarovproject
                     {
                         Update();
                         LateUpdate();                        
-                        Thread.Sleep(80);                        
+                        Thread.Sleep(50);                        
                     }                    
                 }
             );

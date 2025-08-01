@@ -43,7 +43,7 @@ namespace makarovproject
             switch (tecla)
             {
                 case ConsoleKey.F:
-                    if (bullets.Count > 7)
+                    if (bullets.Count > 5)
                     {
                         Console.SetCursorPosition(20, 0);
                         Console.WriteLine("Limite de balas atingido! ");
@@ -73,7 +73,7 @@ namespace makarovproject
                     GameManager.Instance.player.visible = false;
 
                     GameManager.Instance.diamante.visible = true;
-                    GameManager.Instance.diamante.input = true;
+                    GameManager.Instance.diamante.input = true;                   
 
                     GameManager.Instance.player.visible = false;
                     GameManager.Instance.player.visible = false;
@@ -116,14 +116,21 @@ namespace makarovproject
         public override void Draw()
         {
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.SetCursorPosition(pos.x , pos.y);
+            Console.SetCursorPosition(pos.x, pos.y);
             Console.WriteLine(forma);
             Console.ResetColor();
             Console.SetCursorPosition(0, 0);
             Console.WriteLine($"Pontos: {ponto} ");
-            foreach (var bullet in bullets)
+            try
             {
-                bullet.Draw();
+                foreach (var bullet in bullets)
+                {
+                    bullet.Draw();
+                }
+            }
+            catch (Exception ex)
+            {
+
             }
         }
     }

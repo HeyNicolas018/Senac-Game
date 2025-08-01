@@ -32,6 +32,9 @@ namespace makarovproject
                         GameManager.Instance.cores.visible = false;
                         GameManager.Instance.cores.input = false;
 
+                        GameManager.Instance.creditos.visible = false;
+                        GameManager.Instance.creditos.input = false;
+
                         GameManager.Instance.diamante.visible = true;
                         GameManager.Instance.diamante.input = true;
                   break;
